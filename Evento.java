@@ -35,47 +35,31 @@ public class Evento {
         this.salas.add(sala);
     }
 
-    // metodo de manipulacao de vetores 1
     public Sala getSalaPorCapacidade(int capacidade) {
         for (int i = 0; i < salas.size(); i++) {
             Sala sala = salas.get(i);
 
-            if (sala.getLotacaoMaxima() == capacidade) {
+            if (sala.getLotacaoMaxima() <= capacidade) {
                 return sala;
             }
         }
         return null;
     }
 
-    // metodo de manipulacao de vetores 2
-    public List<Inscricao> getInscricoesEstudante() {
-        List<Inscricao> alunos = new ArrayList<>();
-
+    public List<Inscricao> getInscricoesPorTipo(String tipoInscricao) {
+        List<Inscricao> incricoes = new ArrayList<>();
+            
         for (int i = 0; i < inscricoes.size(); i++) {
             Inscricao inscricao = inscricoes.get(i);
             
-            if (inscricao.getCategoria() == Inscricao.CategoriaIncricao.ESTUDANTE) {
-                alunos.add(inscricao);
+            if (inscricao.getCategoria() == inscricao.getCategoria()) {
+                incricoes.add(inscricao);
             }
         }
 
-        return alunos;
+        return incricoes;
     }
 
-    // metodo de manipulacao de vetores 3
-    public boolean alterarValorSala(int idSala, double novoValor) {
-        for (int i = 0; i < salas.size(); i++) {
-            Sala sala = salas.get(i);
-
-            if (sala.getId() == idSala) {
-                sala.setValorDiaria(novoValor);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // metodo de manipulacao de vetores 4
     public double calcularReceitaTotal() {
         double receitaTotal = 0.0;
 
@@ -87,7 +71,6 @@ public class Evento {
         return receitaTotal;
     }
 
-    // metodo de manipulacao de vetores 5
     public int capacidadeTotalDoEvento() {
         int capacidadeTotal = 0;
 
@@ -99,7 +82,6 @@ public class Evento {
         return capacidadeTotal;
     }
 
-    // metodo de manipulacao de vetores 6
     public List<Sala> getSalasPorLocalizacao(String localizacao) {
         List<Sala> salasLocalizacao = new ArrayList<>();
 
@@ -114,7 +96,6 @@ public class Evento {
         return salasLocalizacao;
     }
 
-    // metodo de manipulacao de vetores 7
     public void removerInscricaoPorId(int idInscricao) {
         for (int i = 0; i < inscricoes.size(); i++) {
             Inscricao inscricao = inscricoes.get(i);
@@ -126,7 +107,6 @@ public class Evento {
         }
     }
 
-    // getters e setters
     public int getCodigo() {
         return codigo;
     }
@@ -135,8 +115,13 @@ public class Evento {
         return nome;
     }
 
-    public TipoEvento getTipoEvento() {
-        return tipoEvento;
+    public String getTipoEvento() {
+        if (tipoEvento == TipoEvento.FEIRA)
+            return "Feira";
+        else if (tipoEvento == TipoEvento.WORKSHOP)
+            return "Workshop";
+        else
+            return "Seminario";
     }
 
     public Date getDataInicial() {
@@ -155,11 +140,36 @@ public class Evento {
         return inscricoes.size();
     }
 
+    public List<Sala> getSalas() {
+        return salas;
+    }
+
     public void setDataInicial(Date dataInicial) {
         this.dataInicial = dataInicial;
     }
 
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    public List<Inscricao> getInscricoes() {
+        return inscricoes;
+    }
+
+    public boolean removerSala(Sala sala) {
+        return salas.remove(sala);
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", tipoEvento=" + tipoEvento +
+                ", dataInicial=" + dataInicial +
+                ", dataFinal=" + dataFinal +
+                ", inscricoes=" + inscricoes.size() +
+                ", salas=" + salas.size() +
+                '}';
     }
 }

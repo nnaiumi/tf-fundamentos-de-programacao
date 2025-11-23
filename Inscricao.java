@@ -31,8 +31,13 @@ public class Inscricao {
         return nome;
     }
 
-    public CategoriaIncricao getCategoria() {
-        return categoria;
+    public String getCategoria() {
+        if (categoria == CategoriaIncricao.ESTUDANTE)
+            return "Estudante";
+        else if (categoria == CategoriaIncricao.PROFISSIONAL)
+            return "Profissional";
+        else
+            return "VIP";
     }
 
     public double getPrecoInscricao() {
@@ -53,5 +58,18 @@ public class Inscricao {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Inscricao{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", categoria=" + getCategoria() +
+                ", precoInscricao=" + precoInscricao +
+                ", cpf=" + cpf +
+                ", cargo='" + cargo + '\'' +
+                ", instituicao='" + instituicao + '\'' +
+                '}';
     }
 }
